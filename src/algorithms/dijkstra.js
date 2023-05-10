@@ -36,10 +36,11 @@ const updateUnvisitedNeighbors = (node, grid) => {
 }
 
 export const dijkstra = (grid, startNode, finishNode) => {
+    
     const visitedNodes = [];
     const unvisitedNodes = getAllNodes(grid);
     startNode.distance = 0;
-
+    
     while (unvisitedNodes.length !== 0) {
         sortNodesByDistance(unvisitedNodes);
         const closestNode = unvisitedNodes.shift();
@@ -54,4 +55,16 @@ export const dijkstra = (grid, startNode, finishNode) => {
 
         updateUnvisitedNeighbors(closestNode, grid);
     }
+}
+
+export const getShortestPath = (finishNode) => {
+    let nodes = [];
+    let currentNode = finishNode;
+
+    while (currentNode !== null) {
+        nodes.unshift(currentNode);
+        currentNode = currentNode.previousNode;
+    }
+
+    return nodes;
 }
